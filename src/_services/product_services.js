@@ -7,13 +7,13 @@ export const productService = {
 };
 
 function getAllProducts() {
-  return axios.get("http://localhost:8080/product/get-all");
+  return axios.get("https://fegusplacebackend.onrender.com/product/get-all");
 }
 
 function createProduct(product) {
   let token = JSON.parse(localStorage.getItem("token"));
   const header = { headers: { Authorization: `Bearer ${token}` } };
-  return axios.post("http://localhost:8080/product/add", product, header);
+  return axios.post("https://fegusplacebackend.onrender.com/product/add", product, header);
 }
 
 function deleteProduct(id) {
@@ -23,7 +23,7 @@ function deleteProduct(id) {
   };  
   return axios({
     method: "delete",
-    url: "http://localhost:8080/product/delete",
+    url: "https://fegusplacebackend.onrender.com/product/delete",
     data: { id: id },
     headers: { Authorization: `Bearer ${token}`}
   });
@@ -37,7 +37,7 @@ function updateProduct(product) {
 
   return axios({
     method: "post",
-    url: "http://localhost:8080/product/update",
+    url: "https://fegusplacebackend.onrender.com/product/update",
     data: {product},
     headers: { Authorization: `Bearer ${token}`}
   });

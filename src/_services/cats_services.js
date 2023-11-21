@@ -5,14 +5,14 @@ export const Cats_services = {
 };
 
 function getAllCats() {
-  return axios.get("http://localhost:8080/category/getAllCategories");
+  return axios.get("https://fegusplacebackend.onrender.com/category/getAllCategories");
 }
 
 function createCategory(category) {
   let token = JSON.parse(localStorage.getItem("token"));
   const header = { headers: { Authorization: `Bearer ${token}` } };
   return axios.post(
-    "http://localhost:8080/category/addCategory",
+    "https://fegusplacebackend.onrender.com/category/addCategory",
     category,
     header
   );

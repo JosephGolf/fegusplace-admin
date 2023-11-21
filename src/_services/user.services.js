@@ -9,10 +9,10 @@ export const userService = {
   findUser,
 };
 function LogIn(email, password) {
-  return axios.post("http://localhost:8080/auth/login", { email, password });
+  return axios.post("https://fegusplacebackend.onrender.com/auth/login", { email, password });
 }
 function AddUser(name, email, password, age, cart) {
-  return axios.post("http://localhost:8080/auth/signup", {
+  return axios.post("https://fegusplacebackend.onrender.com/auth/signup", {
     name,
     email,
     password,
@@ -25,7 +25,7 @@ function GetAllUsers() {
   let token = JSON.parse(localStorage.getItem("token"));
   const header = { headers: { Authorization: `Bearer ${token}` } };
 
-  return axios.get("http://localhost:8080/user/getAll", header);
+  return axios.get("https://fegusplacebackend.onrender.com/user/getAll", header);
 }
 
 function DeleteUser(email) {
@@ -36,7 +36,7 @@ function DeleteUser(email) {
   // console.log(email);
   return axios({
     method: "delete",
-    url: "http://localhost:8080/user/delete",
+    url: "https://fegusplacebackend.onrender.com/user/delete",
     data: { email: email },
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -47,7 +47,7 @@ function UpdateUser(user) {
 
   return axios({
     method: "PUT",
-    url: "http://localhost:8080/user/update",
+    url: "https://fegusplacebackend.onrender.com/user/update",
     data: { ...user },
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -56,7 +56,7 @@ function findUser(user) {
   let token = JSON.parse(localStorage.getItem("token"));
   return axios({
     method: "post",
-    url: "http://localhost:8080/user/get-user",
+    url: "https://fegusplacebackend.onrender.com/user/get-user",
     data: { ...user },
     headers: { Authorization: `Bearer ${token}` },
   });
