@@ -10,8 +10,8 @@ function AddUser() {
   const [ConfigPassword, setConfigPassword] = React.useState('');
   const [age, setAge] = React.useState(0);
   const [submited, setSubmited] = React.useState(false);
-  const [cart, setCart] = React.useState([ ]);
-  const [isAdmin, setIsAdmin] = React.useState(false);
+  const [cart] = React.useState([ ]);
+  const [isAdmin] = React.useState(true);
   const notificationAlertRef = React.useRef(null);
   const notify = () => {
     var type = "success";
@@ -35,7 +35,7 @@ function AddUser() {
     setSubmited(true);
     if (name, email, password, ConfigPassword, age) {
       if (password === ConfigPassword) {
-        userService.AddUser(name,email,password,age,cart).then(
+        userService.AddUser(name,email,password,age,cart,isAdmin).then(
           data => {
             notify();
             console.log('data',data);
