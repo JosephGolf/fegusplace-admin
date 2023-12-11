@@ -11,13 +11,14 @@ export const userService = {
 function LogIn(email, password) {
   return axios.post("https://fegusplacebackend.onrender.com/auth/login", { email, password });
 }
-function AddUser(name, email, password, age, cart) {
+function AddUser(name, email, password, age, cart,isAdmin) {
   return axios.post("https://fegusplacebackend.onrender.com/auth/signup", {
     name,
     email,
     password,
     cart,
     age,
+    isAdmin,
   });
 }
 
