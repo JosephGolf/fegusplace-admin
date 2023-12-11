@@ -62,6 +62,9 @@ function Users() {
   const gotToAddUser = () => {
     history.push("/admin/adduser");
   };
+  const handleEdit = (userId) => {
+    history.push(`/admin/edituser/${userId}`);
+  };
 
   return (
     <>
@@ -115,6 +118,7 @@ function Users() {
                     Delete
                   </div>
                   <div className="stats" style={{ cursor: "pointer" }}>
+                    onClick={() => handleEdit(user.id)}
                     <i className="fas fa-edit text-primary mr-1"></i>
                     Edit
                   </div>
