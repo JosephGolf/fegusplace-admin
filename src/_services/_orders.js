@@ -4,5 +4,5 @@ export const orderServic = {
 };
 
 function getAllOrders() { 
-  return axios.get("http://localhost:8080/order/get-all");
+  return axios.get("https://fegusplacebackend.onrender.com/order/get-all");
 }

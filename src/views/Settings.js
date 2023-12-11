@@ -56,7 +56,7 @@ function Settings() {
       }
     };
 
-    fetch('http://localhost:8080/settings/update-top-image', {
+    fetch('https://fegusplacebackend.onrender.com/settings/update-top-image', {
       method: 'POST',
       headers: header.headers,
       body: JSON.stringify(newTopImage),
@@ -88,7 +88,7 @@ function Settings() {
       }
     };
 
-    fetch('http://localhost:8080/settings/update-social-links', {
+    fetch('https://fegusplacebackend.onrender.com/settings/update-social-links', {
       method: 'POST',
       headers: header.headers,
       body: JSON.stringify(newSocialLinks),
@@ -146,7 +146,7 @@ function Settings() {
       }
     };
 
-    fetch('http://localhost:8080/settings/update-sliders', {
+    fetch('https://fegusplacebackend.onrender.com/settings/update-sliders', {
       method: 'POST',
       headers: header.headers,
       body: JSON.stringify({ sliders: updatedSliders }),

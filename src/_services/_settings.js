@@ -4,7 +4,7 @@ export const Setting_ser = {
 };
 
 function getSettings() {
-  return axios.get("http://localhost:8080/settings/get-settings");
+  return axios.get("https://fegusplacebackend.onrender.com/settings/get-settings");
 }
 
 
