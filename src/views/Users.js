@@ -117,8 +117,8 @@ function Users() {
                     <i className="fas fa-trash text-danger mr-1"></i>
                     Delete
                   </div>
-                  <div className="stats" style={{ cursor: "pointer" }}>
-                    onClick={() => handleEdit(user.id)}
+                  <div className="stats" style={{ cursor: "pointer" }} onClick={() => handleEdit(user.id)}>
+
                     <i className="fas fa-edit text-primary mr-1"></i>
                     Edit
                   </div>
