@@ -90,7 +90,7 @@ function AddProduct() {
       const product = {
         nameEn,
         nameAr,
-        finalPrice,
+        price: finalPrice,
         discount,
         description,
         brand,
@@ -117,7 +117,7 @@ function AddProduct() {
   let handleSubCatSelct = (e) =>{    
     let allCatsArr = JSON.parse(localStorage.getItem("cats"));
     for(let i=0; i<allCatsArr.length; i++){
-      var newArr = allCatsArr[i].subCategory.filter(x => x.subCatName === e.target.value).map(x => x.subCatArray);     
+      let newArr = allCatsArr[i].subCategory.filter(x => x.subCatName === e.target.value).map(x => x.subCatArray);
       if(newArr.length != 0){
         setSelectedSubCatArr(newArr[0]);
         setProduct_cat({...product_cat,sub:e.target.value});
