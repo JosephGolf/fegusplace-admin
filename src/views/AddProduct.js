@@ -11,6 +11,7 @@ import {
 import { productService } from "_services/product_services";
 import { Cats_services } from "_services/cats_services";
 function AddProduct() {
+  const [submitted, setSubmitted] = useState(false);
   const [nameEn, setNameEn] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
   const [brand, setBrand] = React.useState("");
@@ -41,6 +42,9 @@ function AddProduct() {
   };
   const handelSubmit = (e) => {
     e.preventDefault();
+    if (submitted) {
+      return;
+    }
     setSubmitted(true);
     const newImage = image.filter((img) => {
       return img !== "";
