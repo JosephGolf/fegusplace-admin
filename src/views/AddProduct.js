@@ -41,9 +41,6 @@ function AddProduct() {
   };
   const handelSubmit = (e) => {
     e.preventDefault();
-    if (submitted) {
-      return;
-    }
     setSubmitted(true);
     const newImage = image.filter((img) => {
       return img !== "";
