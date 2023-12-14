@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { userService } from "_services/user.services";
 import NotificationAlert from "react-notification-alert";
 import {
@@ -22,7 +22,9 @@ function AddProduct() {
   const [nameAr, setNameAr] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
   const [brand, setBrand] = React.useState("");
-  const [price, setPrice] = React.useState(0);
+  /*const [price, setPrice] = React.useState(0);*/
+  const [originalPrice, setOriginalPrice] = React.useState(0);
+  const [finalPrice, setFinalPrice] = React.useState(0);
   const [description, setDescription] = React.useState("");
   const [discount, setDiscount] = React.useState(0);
   const [image, setImage] = React.useState([""]);
@@ -77,7 +79,7 @@ function AddProduct() {
     if (
       (nameEn,
       nameAr,
-      price,
+      finalPrice,
       discount,
       description,
       brand,
@@ -88,7 +90,7 @@ function AddProduct() {
       const product = {
         nameEn,
         nameAr,
-        price,
+        finalPrice,
         discount,
         description,
         brand,
@@ -124,9 +126,19 @@ function AddProduct() {
       
   }
 }
-
-  
-
+  const handleOriginalPriceChange = (e) => {
+    const newOriginalPrice = parseFloat(e.target.value) || 0;
+    setOriginalPrice(newOriginalPrice);
+    const calculatedFinalPrice = calculateFinalPrice(newOriginalPrice);
+    setFinalPrice(calculatedFinalPrice);
+  };
+  const calculateFinalPrice = (originalPrice) => {
+    let calculatedFinalPrice = originalPrice * 0.025;
+    if (originalPrice > 2500) {
+      calculatedFinalPrice += 100;
+    }
+    return calculatedFinalPrice;
+  };
 
   return (
     <Container>
@@ -199,15 +211,25 @@ function AddProduct() {
                 <Form.Label> Prodcut price</Form.Label>
                 <Form.Control
                   type="number"
-                  name="price"
+                  name="originalPrice"
                   placeholder="Enter product price"
-                  onChange={(e) => setPrice(e.target.value)}
+                  /*onChange={(e) => setPrice(e.target.value)}*/
+                  onChange={handleOriginalPriceChange}
                 />
                 <Form.Text
-                  className={submited && !price ? "text-danger" : "d-none"}
+                  className={submited && !originalPrice ? "text-danger" : "d-none"}
                 >
                   Product nameAr is required.
                 </Form.Text>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Final Price</Form.Label>
+                <Form.Control
+                    type="text"
+                    name="finalPrice"
+                    value={finalPrice}
+                    readOnly
+                />
               </Form.Group>
 
               <Form.Group>
@@ -296,85 +318,8 @@ function AddProduct() {
                 {selectedSubCatArr.map((item,index) => <><option value={item} key={index}>{item}</option></>)}           
               </Form.Control>
             </Form.Group>
-
-
-            
-
-
-            
-{/* 
-            <Form.Group>
-              <Form.Label> category Name En</Form.Label>
-              <Form.Control
-                type="text"
-                name="cNameEn"
-                placeholder="Enter category Name En"
-                onChange={(e) =>
-                  setCategory({ ...category, cNameEn: e.target.value })
-                }
-              />
-              <Form.Text
-                className={submited && !category ? "text-danger" : "d-none"}
-              >
-                Product nameAr is required.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label> category Name Ar</Form.Label>
-              <Form.Control
-                type="text"
-                name="cNameAr"
-                placeholder="Enter category Name Ar"
-                onChange={(e) =>
-                  setCategory({ ...category, cNameAr: e.target.value })
-                }
-              />
-              <Form.Text
-                className={submited && !category ? "text-danger" : "d-none"}
-              >
-                Product nameAr is required.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label> category Type</Form.Label>
-              <Form.Control
-                type="text"
-                name="cType"
-                placeholder="Enter category Type"
-                onChange={(e) =>
-                  setCategory({ ...category, cType: e.target.value })
-                }
-              />
-              <Form.Text
-                className={submited && !category ? "text-danger" : "d-none"}
-              >
-                Product nameAr is required.
-              </Form.Text>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label> category Model</Form.Label>
-              <Form.Control
-                type="text"
-                name="Model"
-                placeholder="Enter category Model"
-                onChange={(e) =>
-                  setCategory({ ...category, cModel: e.target.value })
-                }
-              />
-              <Form.Text
-                className={submited && !category ? "text-danger" : "d-none"}
-              >
-                Product nameAr is required.
-              </Form.Text>
-            </Form.Group>
-          */}
-         
           </Col>
         </Row>
-
         <Row>
           <Col lg="12">
             <Button
