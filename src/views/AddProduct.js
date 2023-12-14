@@ -1,59 +1,30 @@
 import React, { useEffect } from "react";
-import { userService } from "_services/user.services";
 import NotificationAlert from "react-notification-alert";
 import {
-  Badge,
   Button,
   Form,
   Card,
-  Navbar,
-  Nav,
   Container,
   Row,
   Col,
 } from "react-bootstrap";
-import { data, event } from "jquery";
 import { productService } from "_services/product_services";
 import { Cats_services } from "_services/cats_services";
-import axios from "axios";
-
 function AddProduct() {
   const [nameEn, setNameEn] = React.useState("");
-  const [nameAr, setNameAr] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
   const [brand, setBrand] = React.useState("");
-  /*const [price, setPrice] = React.useState(0);*/
   const [originalPrice, setOriginalPrice] = React.useState(0);
   const [finalPrice, setFinalPrice] = React.useState(0);
   const [description, setDescription] = React.useState("");
   const [discount, setDiscount] = React.useState(0);
   const [image, setImage] = React.useState([""]);
   const [product_cat, setProduct_cat] = React.useState({ main: "", sub: "",type:"" });
-  const [products, setProducts] = React.useState([]);
   const [submited, setSubmited] = React.useState(false);
   const notificationAlertRef = React.useRef(null);
-  const notify = () => {
-    var type = "success";
-    var options = {};
-    options = {
-      place: "tc",
-      message: (
-        <div>
-          <div>the User You Add Is Success</div>
-        </div>
-      ),
-      type: type,
-      autoDismiss: 7,
-    };
-    notificationAlertRef.current.notificationAlert(options);
-  };
-
   const [cats, setCats] = React.useState([]);
-
-  // selecting tree
   const [selectedCats, setselectedCats] = React.useState([]);
   const [selectedSubCatArr, setSelectedSubCatArr] = React.useState([]);
-
   useEffect(() => {       
     Cats_services.getAllCats().then(
       data => {            
@@ -65,7 +36,6 @@ function AddProduct() {
       }
     )
   },[]);
-
   const handelAddImage = () => {
     setImage([...image, ""]);
   };
@@ -78,7 +48,6 @@ function AddProduct() {
     setImage(newImage);
     if (
       (nameEn,
-      nameAr,
       finalPrice,
       discount,
       description,
@@ -89,7 +58,6 @@ function AddProduct() {
     ) {
       const product = {
         nameEn,
-        nameAr,
         price: finalPrice,
         discount,
         description,
@@ -98,9 +66,16 @@ function AddProduct() {
         image,
         product_cat,
       };
-
-      productService.createProduct(product);
-      console.log(product);
+      productService.createProduct(product)
+          .then(() => {
+            console.log("Product successfully saved");
+            alert("Product successfully saved");
+              history.push("/admin/addProduct");
+          })
+          .catch((error) => {
+            console.error("Error saving product:", error);
+            alert("Error saving product");
+          });
     }
   };
 
@@ -112,8 +87,6 @@ function AddProduct() {
       }
     }    
   }
-
-
   let handleSubCatSelct = (e) =>{    
     let allCatsArr = JSON.parse(localStorage.getItem("cats"));
     for(let i=0; i<allCatsArr.length; i++){
@@ -123,7 +96,6 @@ function AddProduct() {
         setProduct_cat({...product_cat,sub:e.target.value});
          console.log(newArr[0]);
       }
-      
   }
 }
   const handleOriginalPriceChange = (e) => {
@@ -139,7 +111,6 @@ function AddProduct() {
     }
     return calculatedFinalPrice;
   };
-
   return (
     <Container>
       <Form>
@@ -148,7 +119,7 @@ function AddProduct() {
             <Card style={{ padding: 10 }}>
               <NotificationAlert ref={notificationAlertRef} />
               <Form.Group>
-                <Form.Label> Prodcut nameEn</Form.Label>
+                <Form.Label> Product name</Form.Label>
                 <Form.Control
                   type="text"
                   name="nameEn"
@@ -161,24 +132,8 @@ function AddProduct() {
                   Product name is required.
                 </Form.Text>
               </Form.Group>
-
               <Form.Group>
-                <Form.Label> Prodcut nameAr</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="nameAr"
-                  placeholder="Enter product nameAr"
-                  onChange={(e) => setNameAr(e.target.value)}                  
-                />
-                <Form.Text
-                  className={submited && !nameAr ? "text-danger" : "d-none"}
-                >
-                  Product nameAr is required.
-                </Form.Text>
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Label> Prodcut quantity</Form.Label>
+                <Form.Label>Quantity</Form.Label>
                 <Form.Control
                   type="number"
                   name="quantity"
@@ -188,12 +143,12 @@ function AddProduct() {
                 <Form.Text
                   className={submited && !quantity ? "text-danger" : "d-none"}
                 >
-                  Product nameAr is required.
+                  Product Quantity is required.
                 </Form.Text>
               </Form.Group>
 
               <Form.Group>
-                <Form.Label> Prodcut brand</Form.Label>
+                <Form.Label> Brand</Form.Label>
                 <Form.Control
                   type="text"
                   name="brand"
@@ -203,27 +158,26 @@ function AddProduct() {
                 <Form.Text
                   className={submited && !brand ? "text-danger" : "d-none"}
                 >
-                  Product nameAr is required.
+                  Product Brand is required.
                 </Form.Text>
               </Form.Group>
 
               <Form.Group>
-                <Form.Label> Prodcut price</Form.Label>
+                <Form.Label> Product Price</Form.Label>
                 <Form.Control
                   type="number"
                   name="originalPrice"
                   placeholder="Enter product price"
-                  /*onChange={(e) => setPrice(e.target.value)}*/
                   onChange={handleOriginalPriceChange}
                 />
                 <Form.Text
                   className={submited && !originalPrice ? "text-danger" : "d-none"}
                 >
-                  Product nameAr is required.
+                  Product price is required.
                 </Form.Text>
               </Form.Group>
               <Form.Group>
-                <Form.Label>Final Price</Form.Label>
+                <Form.Label>Product Final Price</Form.Label>
                 <Form.Control
                     type="text"
                     name="finalPrice"
@@ -233,7 +187,7 @@ function AddProduct() {
               </Form.Group>
 
               <Form.Group>
-                <Form.Label> Prodcut discount</Form.Label>
+                <Form.Label> Product discount</Form.Label>
                 <Form.Control
                   type="number"
                   name="discount"
@@ -243,12 +197,12 @@ function AddProduct() {
                 <Form.Text
                   className={submited && !discount ? "text-danger" : "d-none"}
                 >
-                  Product nameAr is required.
+                  Product Discount is required.
                 </Form.Text>
               </Form.Group>
 
               <Form.Group>
-                <Form.Label> Prodcut description</Form.Label>
+                <Form.Label> Product description</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
@@ -261,7 +215,7 @@ function AddProduct() {
                     submited && !description ? "text-danger" : "d-none"
                   }
                 >
-                  Product nameAr is required.
+                  Product Description is required.
                 </Form.Text>
               </Form.Group>
 
