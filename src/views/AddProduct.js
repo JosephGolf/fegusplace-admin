@@ -164,7 +164,7 @@ function AddProduct() {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label> Product Price</Form.Label>
+                  <Form.Label> Price</Form.Label>
                   <Form.Control
                       type="number"
                       name="originalPrice"
@@ -178,7 +178,7 @@ function AddProduct() {
                   </Form.Text>
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Product Final Price</Form.Label>
+                  <Form.Label>Final Price</Form.Label>
                   <Form.Control
                       type="text"
                       name="finalPrice"
@@ -188,7 +188,7 @@ function AddProduct() {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label> Product discount</Form.Label>
+                  <Form.Label> Discount</Form.Label>
                   <Form.Control
                       type="number"
                       name="discount"
@@ -203,7 +203,7 @@ function AddProduct() {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label> Product description</Form.Label>
+                  <Form.Label> Description</Form.Label>
                   <Form.Control
                       as="textarea"
                       rows={3}
@@ -221,7 +221,7 @@ function AddProduct() {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Label> Prodcut Image</Form.Label>
+                  <Form.Label>Image</Form.Label>
                   {image.map((img, index) => (
                       <Form.Control
                           key={index}
