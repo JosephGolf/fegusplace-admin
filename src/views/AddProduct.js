@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import NotificationAlert from "react-notification-alert";
+import { useHistory } from 'react-router-dom';
 import {
   Button,
   Form,
@@ -11,6 +12,7 @@ import {
 import { productService } from "_services/product_services";
 import { Cats_services } from "_services/cats_services";
 function AddProduct() {
+  let history = useHistory();
   const [submitted, setSubmitted] = React.useState(false);
   const [nameEn, setNameEn] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
@@ -45,7 +47,7 @@ function AddProduct() {
     if (submitted) {
       return;
     }
-    setSubmitted(true);
+    setSubmited(true);
     const newImage = image.filter((img) => {
       return img !== "";
     });
