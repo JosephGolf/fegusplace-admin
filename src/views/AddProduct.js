@@ -275,7 +275,7 @@ function AddProduct() {
               <Form.Group controlId="exampleForm.SelectCustom">
                 <Form.Label>sub cats</Form.Label>
                 <Form.Control as="select" custom onChange={(e)=>setProduct_cat({...product_cat,type:e.target.value})}>
-                  <option disabled selected>- Choose a sub cat arr -</option>
+                  <option disabled selected>- Choose a sub cat  -</option>
                   {selectedSubCatArr.map((item,index) => <><option value={item} key={index}>{item}</option></>)}
                 </Form.Control>
               </Form.Group>
