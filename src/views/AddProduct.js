@@ -106,7 +106,7 @@ function AddProduct() {
     setFinalPrice(calculatedFinalPrice);
   };
   const calculateFinalPrice = (originalPrice) => {
-    let calculatedFinalPrice = originalPrice + (originalPrice * 0.025);
+    let calculatedFinalPrice = originalPrice + (originalPrice * 0.0225);
     if (originalPrice > 2500) {
       calculatedFinalPrice += 100;
     }
