@@ -25,7 +25,7 @@ function Products() {
   const handleClose = () => setShow(false);
   const handleShow = (product) => {
     setEditProduct(product);
-    setShow(true)
+    setShow(true);
   };
   const handleOriginalPriceChange = (e) => {
     const newOriginalPrice = parseFloat(e.target.value) || 0;
@@ -37,7 +37,7 @@ function Products() {
     setFinalPrice(calculatedFinalPrice);
   };
   // edit fields
-  const [nameEn, setNameEn] = React.useState(""); // sample
+  const [nameEn, setNameEn] = React.useState("");
   const handelDelete = (id) => {
     let cfm = confirm('Are you sure you want to delete this item?',true)
     if(cfm){
@@ -64,19 +64,14 @@ function Products() {
           console.log(err)
         }
     )
-  },[]); //handelDelete, handesetEditProduct, setEditProduct,setProducts -> in need to recall useEffect on delete and at the same time not go inside the infinte loop
-
-
+  },[]);
   let history = useHistory();
   const gotToAddProduct = () =>{
     history.push('/admin/addProduct')
   }
-
-
-
   const notify = () => {
-    var type = "danger";
-    var options = {};
+    let type = "danger";
+    let options = {};
     options = {
       place: "tc",
       message: (
@@ -89,8 +84,6 @@ function Products() {
     };
     notificationAlertRef.current.notificationAlert(options);
   };
-
-
   let handleEditSubmit = (e) =>{
     e.preventDefault();
     let id = e.target[0].value;
@@ -202,7 +195,7 @@ function Products() {
                     <Form.Label>Price</Form.Label>
                     <Form.Control
                         type="text"
-                        name="price"
+                        name="originalPrice"
                         placeholder="Enter product price"
                         defaultValue={editProduct.price}
                         onChange={handleOriginalPriceChange}
