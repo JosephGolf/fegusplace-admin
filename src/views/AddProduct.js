@@ -13,7 +13,6 @@ import { productService } from "_services/product_services";
 import { Cats_services } from "_services/cats_services";
 function AddProduct() {
   let history = useHistory();
-  const [submitted, setSubmitted] = React.useState(false);
   const [nameEn, setNameEn] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
   const [brand, setBrand] = React.useState("");
