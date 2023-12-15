@@ -117,6 +117,9 @@ function Products() {
         }
     )
   }
+  useEffect(() => {
+    setFinalPrice(originalPrice);
+  }, [originalPrice]);
 
   return (
       <>
@@ -169,11 +172,8 @@ function Products() {
                 </Card.Body>
               </Card>
             </Col>
-
           </Row>
         </Container>
-
-
         <Modal size="lg" show={show} onHide={handleClose}>
           <Modal.Body>
             <form onSubmit={handleEditSubmit}>
