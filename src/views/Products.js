@@ -117,9 +117,7 @@ function Products() {
         }
     )
   }
-  useEffect(() => {
-    setFinalPrice(originalPrice);
-  }, [originalPrice]);
+
 
   return (
       <>

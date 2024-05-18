@@ -43,7 +43,7 @@ function AddProduct() {
   };
   const handelSubmit = (e) => {
     e.preventDefault();
-    if (submitted) {
+    if (submited) {
       return;
     }
     setSubmited(true);
